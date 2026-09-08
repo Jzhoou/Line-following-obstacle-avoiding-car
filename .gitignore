@@ -1,0 +1,12 @@
+**/Objects/
+**/Listings/
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.map
+*.lnp
+*.build_log.htm
+*.uvguix.*
+*.uvoptx
