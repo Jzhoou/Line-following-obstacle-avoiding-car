@@ -18,7 +18,7 @@
 
 推荐快照的当前主路径在 `user/main.c` 中初始化 USART、红外循迹、电机、定时器和蜂鸣器。USART 接收中断解析外部视觉/测距数据并更新 `Object_Distance` 与 `Barrier_Distance`，主循环直接使用这两个变量执行目标物与障碍判断。
 
-仓库同时保留了 HC-SR04、舵机和 OLED 驱动，供早期开发、独立实验或后续集成参考；但推荐快照的当前 `main.c` 没有调用 `HCSR04_Init()`、`Servo_Init()` 或 `OLED_Init()`，因此不能将这些模块描述为当前主路径中已经初始化并运行的功能。
+仓库同时保留了 HC-SR04、舵机和 OLED 驱动，供早期开发、独立实验或后续集成参考；其中舵机部分是保留的角度控制驱动。推荐快照的当前 `main.c` 没有调用 `HCSR04_Init()`、`Servo_Init()` 或 `OLED_Init()`，也没有执行舵机扫描，因此不能将这些模块描述为当前主路径中已经初始化并运行的功能。
 
 仓库忽略 Keil 编译输出与本机用户配置，但保留 `.uvprojx`、源码、启动文件及其他打开和理解工程所需的配置。重新编译后，Keil 会在本地生成相应产物。
 
@@ -38,4 +38,4 @@
 
 This repository documents a team-built line-following and obstacle-avoiding car. My contribution was limited to the lower-level STM32F1 firmware, peripheral drivers, and vehicle-control logic. Directories `成品/1` through `成品/4` are development snapshots, with `成品/4` as the recommended starting point.
 
-In the recommended snapshot, the active `user/main.c` path initializes USART, infrared tracking, motor control, a timer, and the buzzer. Its USART receive handler obtains external vision/ranging data and updates `Object_Distance` and `Barrier_Distance`; the main loop uses those values for object and barrier decisions. HC-SR04, servo, and OLED drivers remain in the repository as experimental or retained modules, but the recommended `main.c` does not call `HCSR04_Init()`, `Servo_Init()`, or `OLED_Init()`. The file map above links the active entry point, serial parser, drivers, and Keil project. No claims are made about distance, speed, or success-rate performance.
+In the recommended snapshot, the active `user/main.c` path initializes USART, infrared tracking, Motor/PWM control, a timer, and the buzzer. Its USART receive handler obtains external vision/ranging data and updates `Object_Distance` and `Barrier_Distance`; the main loop uses those values for object and barrier decisions. HC-SR04 and OLED drivers remain as experimental or retained modules, alongside a retained servo angle-control driver; the recommended `main.c` neither initializes the servo driver nor performs servo scanning, and it does not call `HCSR04_Init()` or `OLED_Init()`. The file map above links the active entry point, serial parser, drivers, and Keil project. No claims are made about distance, speed, or success-rate performance.
